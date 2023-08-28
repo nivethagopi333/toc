@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <string.h>
+
+int ismember(char str[], int start, int end) {
+	if (start > end) {
+		return 1;
+	}
+	
+	if (str[start] == '0' && str[end] == '0') {
+		return ismember(str, start + 1, end - 1);
+		}
+		
+		int i;
+		for (i = start; i <= end; i++) {
+			if (str[i] == '1') {
+				break;
+			}
+	}
+	
+	if (i > end) {
+		return ismember(str, start, end);
+		} else {
+			return ismember(str, start, i - 1) && ismember(str, i + 1, end);
+			}
+		}
+		
+		int main() {
+			char str[100];
+			printf("enter a string: ");
+			scanf("%s", str);
+			
+			int len = strlen(str);
+			if (ismember(str, 0, len - 1)) {
+				printf("the string belongs to the language defined by the CFG.\n");
+				} else {
+					printf("the string does not belong to the language defined by the CFG.\n");
+				}
+				 return 0;
+		}
